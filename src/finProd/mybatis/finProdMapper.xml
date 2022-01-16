@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="finProd.mybatis.finProdMapper">
+		<!-- 금융상품검색 페이지 최초 진입시 리스트 출력 start -->
+		<select id="listFinProd" resultType="FinProdDTO">
+			SELECT
+				*
+			FROM
+				fin_product
+			ORDER BY
+				num asc
+		</select>
+		<!-- 금융상품검색 페이지 최초 진입시 리스트 출력 end -->
+		
+		<!-- 금융상품검색 기능 start -->
+		<select id="findFinProd" parameterType="java.util.HashMap" resultType="FinProdDTO">
+			SELECT
+				*
+			FROM
+				fin_product
+			WHERE
+				name like '%'||#{keyword}||'%'
+			<if test="kindArr != null">
+				AND kind IN (
+				<foreach collection="kindArr" item="item" separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="bankArr != null">
+				AND bank IN (
+				<foreach collection="bankArr" item="item" separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="durArr != null">
+				AND (
+				<foreach collection="durArr" item="item" separator="or">
+					duration between ${item}
+				</foreach>
+				)
+			</if>
+			<if test="intArr != null">
+				AND (
+				<foreach collection="intArr" item="item" separator="or">
+					interest between ${item}
+				</foreach>
+				)
+			</if>
+			<if test="memArr != null">
+				AND (
+				<foreach collection="memArr" item="item" separator="or">
+					member between ${item}
+				</foreach>
+				)
+			</if>
+		</select>
+		<!-- 금융상품검색 기능 end -->
+		
+		<!-- 금융상품 상세보기 start -->
+		<select id="getFinProd" parameterType="int" resultType="FinProdDTO">
+			SELECT
+				*
+			FROM
+				fin_product
+			WHERE
+				num = #{num}
+		</select>
+		<!-- 금융상품 상세보기 end -->
+		
+		<!-- 금융상품 비교하기 start -->
+		<select id="compareFinProd" parameterType="java.util.HashMap" resultType="FinProdDTO">
+			SELECT
+				*
+			FROM
+				fin_product
+			WHERE 
+			<foreach item="item" collection="compArr" separator="or">
+				num = #{item}
+			</foreach>
+				
+		</select>
+		<!-- 금융상품 비교하기 end -->
+	</mapper>
+
+
+
+
+
+
+
+

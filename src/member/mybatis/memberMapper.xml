@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+   <!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member.mybatis.memberMapper">
+
+
+	<!-- 회원가입 / 회원 -->
+	<insert id="insertMember" parameterType="MemberDTO">
+	insert into bank_member
+		values(
+		bank_member_seq.nextval,
+		#{name},
+		#{id},
+		#{passwd},
+		#{passwd2},
+		#{ssn},
+		#{email},
+		#{hp1},
+		#{hp2},
+		#{hp3},
+		#{postcode},
+		#{roadAddress},
+		#{jibunAddress})
+	</insert>
+
+	<!-- 회원정보 중복체크 / 회원 -->
+	<select id="checkMember" parameterType="java.util.HashMap"
+		resultType="MemberDTO">
+		${sql}
+	</select>
+
+
+
+	<!-- 로그인 -->
+	<select id="login" parameterType="java.util.HashMap" resultType="String">
+		${sql}
+	</select>
+
+
+	<select id="getMember" parameterType="String" resultType="MemberDTO">
+		select * from bank_member where id= #{id}
+	</select>
+
+	<!-- 마이페이지에서 수정 / 회원 -->
+	<!-- <update id="updateMember" parameterType="MemberDTO"> -->
+	<update id="updateMember" parameterType="String">
+		update bank_member set
+		name=#{name},
+		id=#{id},
+		passwd=#{passwd},
+		passwd2=#{passwd2},
+		ssn=#{ssn},
+		email=#{email},
+		hp1=#{hp1},
+		hp2=#{hp2},
+		hp3=#{hp3},
+		postcode=#{postcode},
+		roadAddress=#{roadAddress},
+		jibunAddress=#{jibunAddress} 
+		where id = #{id}
+	</update>
+
+	<select id="find_id" parameterType="java.util.HashMap"
+		resultType="String">
+		${sql}
+	</select>
+
+	<select id="find_passwd" parameterType="java.util.HashMap" resultType="String">
+		${sql}
+	</select>
+
+	
+	<delete id="deleteMember" parameterType="String">
+		delete from bank_member where id = #{id}
+	</delete>
+
+
+	<select id="listMember" parameterType="java.util.HashMap" resultType="MemberDTO">
+		${sql}
+	</select>
+
+
+	<select id = "getAddress" parameterType="java.util.HashMap" resultType = "Find_addressDTO">
+	 	${sql}
+	</select>
+	
+	<select id = "idCheck" parameterType = "String" resultType = "MemberDTO">
+		select * from bank_member where id = #{id}
+	</select>
+	
+	<update id ="updatePasswd" parameterType="java.util.HashMap" >
+	  update bank_member set passwd = '${passwd}' where id = '${id}'
+	</update>
+	
+	<select id = "memberCount" resultType = "int">
+		select count(*) from bank_member
+	</select>
+		
+	<select id="memberFind" parameterType="java.util.HashMap" resultType="MemberDTO">
+		${sql}
+	</select>
+	
+	
+</mapper>
+
+
+

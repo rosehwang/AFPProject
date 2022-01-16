@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="news.mybatis.newsMapper">
+		<select id="newsList" parameterType="java.util.HashMap" resultType="NewsDTO">
+			${sql}
+		</select>
+		
+		<insert id="insertNews" parameterType="NewsDTO">
+			insert into news values(news_seq.nextval, #{news_title}, #{news_content}, sysdate, 0, #{news_filesize}, #{news_file})
+		</insert> 
+		
+		<delete id="deleteNews" parameterType="String">
+			delete from news where news_no = #{news_no}
+		</delete>
+		
+		<update id = "updateNews" parameterType="java.util.HashMap">
+			 ${sql}
+		</update>
+		
+		<update id = "getNewsContent" parameterType="String">
+			update news set news_readcount = news_readcount + 1 where news_no = #{news_no}
+		</update>
+		
+		<select id="findNews" parameterType="java.util.HashMap" resultType="NewsDTO">
+			${sql}
+		</select>
+		
+		<select id = "getNews" resultType = "NewsDTO">
+			${sql}
+		</select>
+		
+		<select id = "getCount" resultType = "int">
+			select count(*) from news
+		</select>
+		
+		<select id = "getMainNews" parameterType="java.util.HashMap" resultType = "NewsDTO">
+			${sql}
+		</select>
+		
+		
+	</mapper>

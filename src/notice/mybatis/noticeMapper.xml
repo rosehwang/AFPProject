@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="notice.mybatis.noticeMapper">
+		<select id="noticeList" parameterType = "java.util.HashMap" resultType="NoticeDTO">
+			${sql}
+		</select>
+		
+		<insert id="noticeInsert" parameterType="NoticeDTO">
+			insert into notice values(notice_seq.nextval, #{notice_title}, #{notice_content}, sysdate, 0, #{notice_filesize}, #{notice_file})
+		</insert> 
+		
+		<delete id="noticeDelete" parameterType="String">
+			delete from notice where notice_no=#{notice_no}
+		</delete>
+		
+		<select id="noticeFind" parameterType="java.util.HashMap" resultType="NoticeDTO">
+			${sql}
+		</select>
+		
+		<select id = "getNotice" parameterType ="java.util.HashMap" resultType ="NoticeDTO">
+		    ${sql}
+		</select>
+		
+		<select id = "getCountNotice"  resultType ="int">
+		    select count(*) from notice
+		</select>
+		
+		<update id ="upreadcount" parameterType ="String">
+		    update notice set notice_readcount = notice_readcount +1 where notice_no = #{notice_no}
+		</update>
+		
+		<update id = "updateNotice" parameterType ="java.util.HashMap">
+		  ${sql}
+		</update>
+		
+		<select id = "getMainNotice" parameterType="java.util.HashMap" resultType = "NoticeDTO">
+			${sql}
+		</select>
+		
+	</mapper>
+
+
+
+
+
+
+
+

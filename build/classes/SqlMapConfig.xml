@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<!DOCTYPE configuration
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<properties resource="db.properties" />
+
+	<typeAliases>
+		<typeAlias type="oneqna.dto.OneqnaDTO" alias="OneqnaDTO" />
+		<typeAlias type="oneqna_email.dto.Oneqna_emailDTO" alias="Oneqna_emailDTO" />
+		<typeAlias type="member.dto.MemberDTO" alias="MemberDTO" />
+		<typeAlias type="news.dto.NewsDTO" alias="NewsDTO" />
+		<typeAlias type="notice.dto.NoticeDTO" alias="NoticeDTO" />
+		<typeAlias type="find_Address.dto.Find_addressDTO" alias="Find_addressDTO" />
+		<typeAlias type="bot.dto.BotDTO" alias="BotDTO" />
+        <typeAlias type="call.dto.CallDTO" alias="CallDTO"/>
+         
+		<!-- 금융상품 -->
+		<typeAlias type="finProd.dto.FinProdDTO" alias="finProdDTO" />
+		<typeAlias type="product.dto.ProductDTO" alias="ProductDTO" />
+		<typeAlias type="account.dto.AccountDTO" alias="AccountDTO" />
+		<typeAlias type="account.dto.ThirdDTO" alias="ThirdDTO" />
+		<typeAlias type="account.dto.CoconutDTO" alias="CoconutDTO" />
+		<typeAlias type="account.dto.MyAccountDTO" alias="MyAccountDTO" />
+	</typeAliases>
+
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+
+		</environment>
+	</environments>
+
+	<mappers>
+		<mapper resource="oneqna/mybatis/oneqnaMapper.xml" />
+		<mapper resource="member/mybatis/memberMapper.xml" />
+		<mapper resource="news/mybatis/newsMapper.xml" />
+		<mapper resource="notice/mybatis/noticeMapper.xml" />
+		<mapper resource="bot/mybatis/botMapper.xml" />
+		<mapper resource="oneqna_email/mybatis/oneqna_emailMapper.xml" />
+		<mapper resource="call/mybatis/callMapper.xml"/>
+
+		<!-- 금융상품 -->
+		<mapper resource="finProd/mybatis/finProdMapper.xml" />
+		<mapper resource="product/mybatis/coconutMapper.xml" />
+		<mapper resource="product/mybatis/prodMapper.xml" />
+	</mappers>
+</configuration>
+
+
+
+
+
+
+

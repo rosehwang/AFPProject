@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		<mapper namespace="oneqna_email.mybatis.oneqna_emailMapper">
+		
+		<!--이메일 받기 신청-->
+		<insert  id="insertuserEmail" parameterType="Oneqna_emailDTO">
+			insert into email(no, writer, writer_title, writer_email, content, reg_date)values(
+			 email_seq.nextval,
+			 #{writer},
+			 #{writer_title},
+			 #{writer_email},
+			 #{content},
+			 sysdate)
+		</insert>
+		
+		<!--이메일 신청목록(관리자) -->
+		<select id="emailListAdmin" parameterType="java.util.HashMap" resultType="Oneqna_emailDTO">
+			${sql}
+		</select>
+	
+	
+<!-- 이메일신청 내용 불러오기 -->
+	<select id="getEmail" parameterType="int" resultType="Oneqna_emailDTO">
+			select * from email where no = #{no}
+	</select> 
+	
+	<!--자신이 신청한 이메일리스트 불러오기 -->
+	<select id="mylistEmail"  parameterType="java.util.HashMap" resultType="Oneqna_emailDTO">
+			${sql}
+		</select>
+	
+	<!-- 관리자 메일보내기(update)체크만하기 -->
+	<update id="insertAdminEmail" parameterType="java.util.HashMap" > 
+	 	${sql}
+		</update>
+	
+	<delete id="deleteEmail" parameterType="int">
+		delete from email where no = #{no}
+	</delete>
+		</mapper>

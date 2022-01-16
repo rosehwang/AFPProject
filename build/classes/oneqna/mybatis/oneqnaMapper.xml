@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		<mapper namespace="oneqna.mybatis.oneqnaMapper">
+		<!--관리자가 보는  문의 전체리스트-->
+		<select id="listOneqna" parameterType = "java.util.HashMap" resultType="OneqnaDTO">
+ 			${sql}
+		</select>
+		
+		<!-- 1대1문의 자신이 쓴글 리스트 불러오기 -->
+		<select id="IdOneqnaList"  parameterType="java.util.HashMap" resultType="OneqnaDTO">
+			${sql}
+		</select>
+		<!--사용자 입력--> 
+		<insert id="insertOneqna" parameterType="OneqnaDTO">
+			insert into oneqna(no, writer, content, reg_date) values(
+				oneqna_seq.nextval, 
+				#{writer}, 
+				#{content},
+				 sysdate)
+		</insert> 
+		
+		<select id="getOneqna" parameterType="int" resultType="OneqnaDTO">
+			select * from oneqna where no = #{no}
+	</select> 
+		<update id="insertAdmin" parameterType="java.util.HashMap" > 
+	 	${sql}
+		</update>
+		
+		<delete id="deleteOneqna" parameterType="int">
+		delete from oneqna where no = #{no}
+	</delete>
+	
+	<update id="deleteAdmin" parameterType="java.util.HashMap">
+		${sql}
+	</update>
+
+	<update id="OneqnaUpdate" parameterType="java.util.HashMap">
+		${sql}
+	</update>
+	
+	<select id="getCountOneqna" resultType="int">
+		select count(*) from oneqna
+	</select>
+	
+	</mapper>
+
+
+
+
+
+
+
+

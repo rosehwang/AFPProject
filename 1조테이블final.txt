@@ -1,0 +1,199 @@
+create table oneqna(
+no number primary key,
+writer varchar2(10) not null,
+content varchar2(3000) not null,
+reg_date varchar2(30) not null,
+admin_title varchar2(100),
+admin_regdate varchar2(30),
+admin_content varchar2(3000)
+);
+
+create sequence oneqna_seq
+--start with 1
+--minvalue 1
+--maxvalue 999999999
+--increment by 1
+--nocycle
+nocache--cache 20
+;
+
+create table email(
+no number primary key,
+writer varchar2(10) not null,
+writer_title varchar2(50) not null,
+writer_email varchar2(50) not null,
+content varchar2(3000) not null,
+reg_date varchar2(30) not null,
+admin_title varchar2(100)
+);
+
+create sequence email_seq
+--start with 1
+--minvalue 1
+--maxvalue 999999999
+--increment by 1
+--nocycle
+nocache--cache 20
+;
+
+
+create table bank_member
+  (num number primary key,
+  name varchar2(20) not null,
+  id varchar2(20) not null,
+  passwd varchar2(12) not null,
+ passwd2 varchar2(12) not null,
+  ssn varchar2(30) not null,
+  email varchar2(50),
+  hp1 varchar2(3),
+  hp2 varchar2(4),
+ hp3 varchar2(4),
+postcode varchar2(5) not null,
+roadAddress varchar2(1000) not null,
+jibunAddress varchar2(1000) not null);
+
+create sequence bank_member_seq;
+
+create table news
+(news_no number primary key,
+news_title varchar2(200) not null,
+news_content varchar2(4000),
+news_regdate varchar2(10) not null,
+news_readcount number not null,
+news_filesize number,
+news_file varchar2(1000));
+
+create sequence news_seq;
+
+create table notice(
+notice_no number primary key,
+notice_title varchar2(200) not null,
+notice_content varchar2(4000),
+notice_regdate varchar2(10) not null,
+notice_readcount number not null,
+notice_filesize number,
+notice_file varchar2(1000));
+
+create sequence notice_seq;
+
+
+create table bot
+(no number primary key,
+bot_no varchar2(1) not null,
+bot_title varchar2(100),
+bot_content varchar2(1000));
+
+create sequence bot_seq;
+
+ create table call(
+    call_no number primary key,
+    call_type varchar2(50),
+    call_time varchar2(20),
+    call_title varchar2(50),
+    call_content varchar2(1000),
+    call_hp varchar2(20),
+    call_writer varchar2(20),
+    call_check  varchar2(10));
+
+create sequence call_seq;
+
+insert into bot values (bot_seq.nextval, '1', '가입한 상품 조회', '메인페이지에서 비대면 계좌 개설 > 내 계좌 조회 또는 마이페이지 하단에서 조회가능합니다.');
+
+insert into bot values (bot_seq.nextval, '2', '코코넛 비밀번호 변경', '마이페이지 > 내 정보 관리에서 변경 가능합니다.');
+
+insert into bot values (bot_seq.nextval, '3', '비대면 계좌 개설', '비대면 계좌 개설은 코코넛 공인인증 시스템과 연동하여 본인 인증 후 계좌 개설이 가능한 서비스 입니다.');
+
+insert into bot values (bot_seq.nextval, '4', '자동 로그아웃', '고객님의 소중한 정보 보호를 위하여 화면의 이동없이 10분이 지나면 자동 로그아웃이 됩니다. 시간 연장은 상단에 위치한 시간 연장버튼을 누르거나 다른 화면으로 이동하세요.');
+
+
+
+
+create table fin_product (
+num number primary key,
+bank varchar2(20) not null,
+location varchar2(200) not null,
+name varchar2(100) not null,
+kind varchar2(20) not null,
+content varchar2(4000) not null,
+member varchar2(500) not null,
+duration varchar2(50) not null,
+money varchar2(100) not null,
+interest varchar2(500) not null,
+method varchar2(500) not null,
+join varchar2(500) not null,
+note varchar2(4000) not null
+);
+
+
+create sequence fin_product_seq;
+
+   insert into fin_product values (fin_product_seq.nextval, '신한', '서울 종로구 종로 128 (종로3가)','신한 헬스플러스 적금', '적금','1. 목표 건강관리 마일리지 달성하고 우대이자율 받기 2. 매월 100만원 이내에서 납입 가능한 1년제 대표적금', '30', '1', '10000', '1.80','만기일시지급- 단리식', '온라인에서 가입하신 상품은 온라인으로 해지 가능합니다.(평일 09:00 ~ 21:30)', '-건강관리 마일리지는 삼성전자의 S헬스를 통하여 적립이 가능합니다. 이용가능 단말기 : Android Version 4.4 kitkat 이상 (삼성전자를 포함한 전 안드로이드 기종) -할인구매 쿠폰 제공은 제휴사의 사정에 의하여 중단될 수 있습니다.
+-단, 아이폰 사용자는 적금 가입이 가능하나, S헬스 어플리케이션은 설치할 수 없습니다.
+(스마트 건강관리 우대 달성 불가) -만기 전 해지할 경우 약정한 이자율보다 낮은 중도해지이자율이 적용됩니다. -우대 이자율은 만기해지 계좌에 한해 지급합니다.');
+
+ insert into fin_product values (fin_product_seq.nextval, '기업', '서울특별시 종로구 종로 104','1석7조통장', '예금','1석 7조는? 1석 1조!(입출금식) 소액예금은 조건 없이 높은 금리 연 1.0% 2조! (적립식) 심플한 우대금리 조건으로 연 0.5%p 3조!(입출금식) 전자금융 및 자동화 기기 수수료 면제 4조! (입출금식) 외화 환전 및 여행자 수표 구입 등 환율 우대 5조! (적립, 거치식) 넉넉한 가입금액 6조! (입출금, 적립, 거치식) 사이버 문화센터 (www.happy.ibk.co.kr)강좌 무료수강 7조! (입출금, 적립, 거치식) "IBK와 함께 가자" 문화체험 이벤트', '40', '2', '100000', '1.00','보통예금(6월, 12월의 제 2 토요일), 저축예금(3월, 6월, 9월, 12월의 제 2 토요일)', ' 온라인에서 가입하신 상품은 온라인으로 해지 가능합니다.(평일 09:00 ~ 21:30)', '이 예금은 예금자보호법에 따라 예금 보험 공사가 보호하되, 보호 한도는 본 은행에 있는 귀하의 모든 예금보호 대상 금융상품의 원금과 소정의 이자를 합하여 1인당 " 최고 5천만원" 이며, 5천만원을 초과하는 나머지 금액은 보호하지 않습니다.');
+
+insert into fin_product values (fin_product_seq.nextval, '하나', '서울특별시 종로구 삼봉로 94','하나머니세상 정기예금','예금','하나멤버스 회원손님이 예금의 이자를 하나머니로 적립동의하면 우대금리 제공! 하나카드사의 1Q카드 결제실적까지 보유하면 예금이자의 세금만큼 하나머니로 돌려드리는 정기예금 상품입니다.', '50', '1', '1000000', '2.20','만기일시지급식(6개월), 월이자지급식(12개월)', ' 일부해지 불가','
+만기일 전에 중도해지 시 약정한 금리보다 낮은 중도해지금리가 적용됩니다.
+6개월제는 만기일시지급식으로, 12개월제는 월이자지급식으로만 가입이 가능합니다.
+“세금만큼 하나머니 적립혜택” 은 우대금리 적용손님이 적립요건을 충족한 경우에 제공되며, 하나머니 적립시점에 하나멤버스 회원탈퇴 등 손님 본인의 귀책사유로 하나머니 적립이 불가한 경우에는 제공되지 않습니다.
+※ 이 예금을 비과세종합저축으로 가입하는 경우에는 “세금만큼 하나머니 적립혜택” 이 제공되지 않습니다.');
+
+insert into fin_product values (fin_product_seq.nextval, '우리', '서울특별시 종로구 창경궁로 136 보령빌딩','위비 짠테크 적금','적금','매주마다, 매일마다, 아낀만큼 적립 짠돌이 재테커들에게 딱 맞는 위비뱅크 전용 적금상품!!!!', '30', '3', '1000', '1.45','만기일시지급식', '온라인에서 가입하신 상품은 온라인으로 해지 가능합니다.(평일 09:00 ~ 21:30)','
+<52주 짠플랜>최초 이체금액은 1천원~5만원까지 가능하며 지정요일은 월~금요일 중 택1 가능합니다.자동이체 시 해당 요일이 공휴일이면 다음 영업일에 이체됩니다.
+자동이체 신청일(적금가입일)이 공휴일이고 최초 자동이체일(요일)이 공휴일 직후 첫 영업일인 경우 자동이체는 최초 자동이체일이 아닌 다음 자동이체일(요일)부터 시작됩니다. 
+ex. 6/6(현충일) 화요일에 자동이체신청하면서 이체요일을 수요일로 선택한 경우, 6/7일이 아닌 6/14일에 첫 자동이체가 시작됩니다.  
+신규 시 출금계좌 또는 서비스 신청시 선택한 출금계좌에서 출금되어 이체됩니다.
+자동이체 종료일은 적금 만기일이며 자동이체금액은 적금의 월 적립한도를 초과할 수 없습니다.
+<매일매일 캘린더플랜>이체시작일은 적금 신규일 이후로 지정가능하며 공휴일에는 이체되지 않습니다.
+자동이체 신청일(적금가입일)이 공휴일이고 이체시작일을 공휴일 직후 첫 영업일로 선택할 경우 자동이체는 선택한 이체시작일 다음 영업일부터 시작됩니다. 
+ex. 6/6(현충일) 화요일에 자동이체신청하면서 이체시작일을 6/7일로 선택한 경우 6/8일부터 이체가 시작됩니다.
+신규시 출금계좌 또는 서비스 신청시 선택한 출금계좌에서 출금되어 이체됩니다.
+자동이체 종료일은 적금 만기일이며 자동이체금액은 적금의 월 적립한도를 초과할 수 없습니다.
+<1DAY 절약플랜>신규시 출금계좌 또는 서비스 신청시 선택한 출금계좌에서 출금되어 이체됩니다. 이체금액은 적금의 월 적립한도를 초과할 수 없습니다.');
+
+
+create table third_pass(
+num number primary key,
+key varchar2(20) not null
+);
+
+
+
+insert into third_pass values(1, '사자');
+insert into third_pass values(2, '호랑이');
+insert into third_pass values(3, '코끼리');
+insert into third_pass values(4, '기린');
+insert into third_pass values(5, '하마');
+
+
+create table coconut(
+num number primary key,
+id varchar2(50) not null,
+day varchar2(100) not null
+);
+
+
+
+create sequence coconut_seq;
+
+
+
+create table myaccount (
+num number not null,
+id varchar2(50) not null,
+bank varchar2(50) not null,
+kind varchar2(50) not null,
+name varchar2(100) not null,
+accountNum varchar2(20) primary key,
+duration varchar2(50) not null,
+money number not null,
+interest varchar2(50) not null,
+day varchar2(50) not null
+);
+
+
+
+create sequence myaccount_seq;
+
+commit;

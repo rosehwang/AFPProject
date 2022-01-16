@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+   <mapper namespace="call.mybatis.callMapper">
+      <select id="adminList" parameterType = "java.util.HashMap" resultType="CallDTO">
+         ${sql}
+      </select>
+      
+      <select id="memberList" parameterType = "java.util.HashMap" resultType="CallDTO">
+         ${sql}
+      </select>
+      
+      <select id = "getCall" parameterType ="java.util.HashMap"  resultType ="CallDTO">
+          ${sql}
+      </select>   
+         
+      <insert id="callInsert" parameterType="CallDTO">
+         insert into call values(call_seq.nextval, #{call_type}, #{call_time}, #{call_title}, #{call_content}, #{call_hp}, #{call_writer},0)
+      </insert>    
+         
+      <update id = "updateCall" parameterType ="java.util.HashMap">
+        ${sql}
+      </update>
+       
+       <select resultType="int" id="getCountCall"> 
+      select count(*) from call 
+      </select>
+      
+      <select  parameterType="java.util.HashMap" resultType="int" id="getCountMemberCall"> 
+       ${sql}  
+      </select>
+      
+      <delete parameterType="int" id="deleteCall"> 
+       delete from call where call_no =#{call_no} 
+      </delete>
+      
+   </mapper>
+
+   
